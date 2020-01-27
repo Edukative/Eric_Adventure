@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5775371500542167812}
   - component: {fileID: 4919338957118143688}
-  - component: {fileID: 6732220167383250192}
+  - component: {fileID: 4773508363671684125}
   m_Layer: 0
   m_Name: CollectibleHealth
   m_TagString: Untagged
@@ -69,7 +69,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 00e89d1057578a342b22583144a5ee03, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -81,16 +81,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &6732220167383250192
-BoxCollider:
+--- !u!114 &4773508363671684125
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5478910026243558762}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.291922, y: 2.1321478, z: 0.19999999}
-  m_Center: {x: -0.13403669, y: -0.048622023, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa0339a8aa68bf647951e4010ebfca17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

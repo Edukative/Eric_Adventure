@@ -11,13 +11,16 @@ public class RubyController : MonoBehaviour
     public float timeInvicible = 2.0f;
     bool isInvincible;
     float InvincibleTimer;
+    Animator anim;
+    Vector2 lookDirection = new Vector2(1, 0);
 
     // Start is called before the first frame update
     void Start()
     {
         rubyRB2D = GetComponent<Rigidbody2D>();
-        currentHealth = maxHealth; //The current health is the max health available to the player =
-    }
+        currentHealth = maxHealth; //The current health is the max health available to the player=)
+        anim = GetComponent<Animator>();
+    }                                   
 
     // Update is called once per frame
     void Update()
@@ -25,10 +28,21 @@ public class RubyController : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal"); //Get the horizontal input
         float vertical = Input.GetAxis("Vertical"); //Get the vertical input
 
-        Vector2 position = transform.position; //Makes a vector based on current position =O
+        Vector2 move = new Vector2(horizontal, vertical);
 
-        position.x = position.x + speed * horizontal * Time.deltaTime; //The position is equal to the same position but a little bit bigger XD
-        position.y = position.y + speed * vertical * Time.deltaTime; //Called each second instead of each frame
+        if (!Mathf.Approximately(move.x, 0.0f) || !Mathf.Approximately(move.y, 0.0f))
+        {
+            lookDirection.Set(move.x, move.y);
+            lookDirection.Normalize();
+        }
+
+        anim.SetFloat("Look X", lookDirection.x);
+        anim.SetFloat("Look Y", lookDirection.y);
+        anim.SetFloat("Speed", move.magnitude);
+
+        Vector2 position = transform.position; //Makes a vector based on current position =O
+        position = position + move * speed * Time.deltaTime;
+
         //transform.position = position; 
         //Saves the position to the current one =(
         rubyRB2D.MovePosition(position);
