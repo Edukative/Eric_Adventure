@@ -59,7 +59,27 @@ public class EnemyController : MonoBehaviour
         */
        
         Vector2 wayPointDirection = localNodes[nextNode] - rb2D.position;
+        UpdateAnimations(wayPointDirection);
         float dist = speed * Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log(wayPointDirection.sqrMagnitude);
+        }
+        if (wayPointDirection.sqrMagnitude < dist * dist)
+        {
+            dist = wayPointDirection.magnitude;
+            currentNode = nextNode;
+            nextNode += 1;
+            if (nextNode >= localNodes.Length)
+            {
+                nextNode = 0;
+            }
+        }
+
+        Velocitiy = wayPointDirection.normalized * dist;
+
+        rb2D.MovePosition(rb2D.position + Velocitiy);
 
         /* if (isVertical)
         {
@@ -77,20 +97,14 @@ public class EnemyController : MonoBehaviour
             anim.SetFloat("Move Y", 0);
         }
         */
-        rb2D.MovePosition(position);
-
-        if (wayPointDirection.sqrMagnitude < dist * dist)
-        {
-            dist = wayPointDirection.magnitude;
-            currentNode = nextNode;
-            nextNode += 1;
-
-            if (nextNode >= localNodes.Length)
-            {
-                nextNode = 0;
-            }
-        }
     }
+
+    void UpdateAnimations (Vector2 direction)
+    {
+        anim.SetFloat("Move X", direction.x);
+        anim.SetFloat("Move Y", direction.y);
+    }
+
     private void OnCollisionEnter2D(Collision2D other)
     {
         RubyController player = other.gameObject.GetComponent<RubyController>();
