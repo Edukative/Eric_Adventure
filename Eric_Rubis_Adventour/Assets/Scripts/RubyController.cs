@@ -13,6 +13,8 @@ public class RubyController : MonoBehaviour
     float InvincibleTimer;
     Animator anim;
     Vector2 lookDirection = new Vector2(1, 0);
+    public GameObject projectilePrefab;
+    public float projectileForce = 300;
 
     // Start is called before the first frame update
     void Start()
@@ -56,6 +58,11 @@ public class RubyController : MonoBehaviour
                 isInvincible = false; //The player is vulnerable again
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            Launch();
+        }
     }
 
     public void ChangeHealth (int amount) 
@@ -72,5 +79,18 @@ public class RubyController : MonoBehaviour
 
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth); //Limits the number between 0 and the max health =x
         Debug.Log(currentHealth + "/" + maxHealth);
+
+       
+        
+    }
+
+    void Launch()
+    {
+        GameObject projectileObject = Instantiate(projectilePrefab, rubyRB2D.position * Vector2.up * 0.5f, Quaternion.identity);
+        Projectile projectile = projectileObject.GetComponent<Projectile>();
+        projectile.Launch(lookDirection, projectileForce);
+
+        anim.SetTrigger("Launch");
     }
 }
+
