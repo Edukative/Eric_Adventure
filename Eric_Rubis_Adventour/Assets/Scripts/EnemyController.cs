@@ -20,6 +20,7 @@ public class EnemyController : MonoBehaviour
     public GameObject wayPoints;
     public Vector2[] localNodes;
     //.private Vector2[] worldNodes;
+    bool broken = true;
     int currentNode;
     int nextNode;
     Vector2 Velocitiy; 
@@ -116,4 +117,9 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    public void Fix()
+    {
+        broken = false;
+        rb2D.simulated = false;
+    }
 }
