@@ -19,11 +19,12 @@ public class EnemyController : MonoBehaviour
     //Waypoint values
     public GameObject wayPoints;
     public Vector2[] localNodes;
+
     //.private Vector2[] worldNodes;
     bool broken = true;
     int currentNode;
     int nextNode;
-    Vector2 Velocitiy; 
+    Vector2 Velocitiy;
 
     // Start is called before the first frame update
     void Start()
@@ -121,5 +122,6 @@ public class EnemyController : MonoBehaviour
     {
         broken = false;
         rb2D.simulated = false;
+        anim.SetBool("Fixed", true);
     }
 }
