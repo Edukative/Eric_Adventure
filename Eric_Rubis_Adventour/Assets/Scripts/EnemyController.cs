@@ -26,12 +26,15 @@ public class EnemyController : MonoBehaviour
     int nextNode;
     Vector2 Velocitiy;
 
+    ParticleSystem SmokeEffect;
+
     // Start is called before the first frame update
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
         timer = changeTime;
         anim = GetComponent<Animator>();
+        SmokeEffect = transform.GetComponentInChildren<ParticleSystem>();
 
         //Waypoint stuff
         localNodes = new Vector2[wayPoints.transform.childCount];
@@ -123,5 +126,7 @@ public class EnemyController : MonoBehaviour
         broken = false;
         rb2D.simulated = false;
         anim.SetBool("Fixed", true);
+
+        SmokeEffect.Stop();
     }
 }
